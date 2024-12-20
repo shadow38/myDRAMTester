@@ -15,6 +15,7 @@
 **           2022.10.19 - enabled pullup on DRAM DO - Stan
 **                      - added Auto-find 4164/41256. Jumper is no longer required, but if closed, will force a 4164 test - Stan
 **                      - readAddress and writeAddress routines rewritten for direct port manipulation - significant speed increase - Stan
+**           2024.12.20 - Fix timing, cf https://forum.defence-force.org/viewtopic.php?p=28075#p28075
 */
 
 /* ================================================================== */
@@ -224,9 +225,9 @@ void fill(byte v) {
   if (err_cnt >= MAX_ERRORS) 
     return;
 
-  for (r = 0; r < max_r; r++) {
+  for (c = 0; c < max_c; c++) {
     //green(g? HIGH : LOW);
-    for (c = 0; c < max_c; c++) {
+    for (r = 0; r < max_r; r++) {
       writeAddress(r, c, v);
       if (readAddress(r, c) != v)
         if (error(r, c))
@@ -246,9 +247,9 @@ void fillx(byte pattern) {
   if (err_cnt >= MAX_ERRORS) 
     return;
 
-  for (r = 0; r < max_r; r++) {
+  for (c = 0; c < max_c; c++) {
    // green(g? HIGH : LOW);
-    for (c = 0; c < max_c; c++) {
+    for (r = 0; r < max_r; r++) {
       v = pattern & 1;
       writeAddress(r, c, v);
       pattern = (pattern >> 1) | (v << 7);
@@ -268,9 +269,9 @@ void readx(byte pattern) {
   if (err_cnt >= MAX_ERRORS) 
     return;
 
-  for (r = 0; r < max_r; r++) {
+  for (c = 0; c < max_c; c++) {
     //green(g? HIGH : LOW);
-    for (c = 0; c < max_c; c++) {
+    for (r = 0; r < max_r; r++) {
       v = pattern & 1;
       if (readAddress(r, c) != v)
         if (error(r, c))
