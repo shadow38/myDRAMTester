@@ -15,7 +15,8 @@
 **           2022.10.19 - enabled pullup on DRAM DO - Stan
 **                      - added Auto-find 4164/41256. Jumper is no longer required, but if closed, will force a 4164 test - Stan
 **                      - readAddress and writeAddress routines rewritten for direct port manipulation - significant speed increase - Stan
-**           2024.12.20 - Fix timing, cf https://forum.defence-force.org/viewtopic.php?p=28075#p28075
+**           2024.12.20 - Fix copy and paste error (https://forum.defence-force.org/viewtopic.php?p=28995#p28995)
+**                      - Fix timing, cf https://forum.defence-force.org/viewtopic.php?p=28075#p28075
 */
 
 /* ================================================================== */
@@ -94,7 +95,7 @@ void setBus(word a) {
   (a & 16) ? PORTD |= 1 << PORTD_XA4 : PORTD &= ~(1 << PORTD_XA4);
   (a & 32) ? PORTD |= 1 << PORTD_XA5 : PORTD &= ~(1 << PORTD_XA5);
   (a & 64) ? PORTD |= 1 << PORTD_XA6 : PORTD &= ~(1 << PORTD_XA6);
-  (a & 128) ? PORTD |= 1 << PORTD_XA6 : PORTD &= ~(1 << PORTD_XA7);
+  (a & 128) ? PORTD |= 1 << PORTD_XA7 : PORTD &= ~(1 << PORTD_XA7);
   (a & 256) ? PORTC |= 1 << PORTC_XA8 : PORTC &= ~(1 << PORTC_XA8);  
     
 }
